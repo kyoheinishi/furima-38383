@@ -21,10 +21,9 @@ class Item < ApplicationRecord
     validates :item_name
     validates :caption
     validates :image
-    validates :price, numericality: { with: /\A[0-9]+\z/, message: "は半角数値で入力してください" }
+    validates :price, numericality: { with: /\A[0-9]+\z/ }
   end
 
-    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
-                                      message: "は¥300〜¥9,999,999の間で入力してください" }
+    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
   
 end
