@@ -40,6 +40,9 @@ class ItemsController < ApplicationController
       @item.destroy
       redirect_to root_path
     end
+    else
+      render :index
+    end
   end
 
   private
