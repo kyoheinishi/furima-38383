@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :item_id_set, only: [:index, :create]
-  before_action :move_to_index, only: [:edit]
+  before_action :move_to_index, only: [:edit, :index]
 
   def index
     if @item.order.present?
