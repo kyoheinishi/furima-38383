@@ -1,8 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: :index
-  before_action :item_id_set,  only:[:index, :create]
+  before_action :item_id_set, only: [:index, :create]
   before_action :move_to_index, only: [:edit]
-
 
   def index
     if @item.order.present?
@@ -15,8 +14,8 @@ class OrdersController < ApplicationController
   def create
     @order_purchaser = OrderPurchaser.new(order_purchaser_params)
     if @order_purchaser.valid?
-       pay_item
-       @order_purchaser.save
+      pay_item
+      @order_purchaser.save
       redirect_to root_path
     else
       render :index
@@ -26,7 +25,9 @@ class OrdersController < ApplicationController
   private
 
   def order_purchaser_params
-    params.require(:order_purchaser).permit(:post_code, :prefecture_id, :city, :house_number, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:order_purchaser).permit(:post_code, :prefecture_id, :city, :house_number, :building, :phone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
@@ -45,7 +46,4 @@ class OrdersController < ApplicationController
   def move_to_index
     redirect_to root_path if current_user.id == @item.user.id
   end
-
-  
-
 end
